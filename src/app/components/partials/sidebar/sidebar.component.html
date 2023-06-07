@@ -1,0 +1,110 @@
+<aside class="sidebar-fixed-left sidebar h-full justify-start">
+  <section class="sidebar-title items-center p-4">
+    <app-guard-icon />
+
+    <div class="flex flex-col">
+      <span>Stationary Admin Page</span>
+      <span class="text-xs font-normal text-content2">Trang quản trị</span>
+    </div>
+  </section>
+
+  <section class="sidebar-content h-fit min-h-[20rem] overflow-visible">
+    <nav class="menu rounded-md">
+      <section class="menu-section px-4">
+        <ul class="menu-items">
+          <li>
+            <input type="checkbox" id="menu-1" class="menu-toggle" />
+            <label class="menu-item justify-between" for="menu-1">
+              <div class="flex gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 48 48"
+                >
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linejoin="round"
+                    stroke-width="4"
+                  >
+                    <path d="M44 14L24 4L4 14v20l20 10l20-10V14Z" />
+                    <path
+                      stroke-linecap="round"
+                      d="m4 14l20 10m0 20V24m20-10L24 24M34 9L14 19"
+                    />
+                  </g>
+                </svg>
+                <span>Quản lý sản phẩm</span>
+              </div>
+
+              <span class="menu-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </span>
+            </label>
+
+            <div class="menu-item-collapse">
+              <div class="min-h-0">
+                <label class="menu-item ml-6">Thống kê doanh thu</label>
+                <label class="menu-item ml-6">Chỉnh sửa sản phẩm</label>
+              </div>
+            </div>
+          </li>
+
+          <app-sidebar-item [title]="'Quản lý kho'">
+            <app-warehouse-icon />
+          </app-sidebar-item>
+
+          <app-sidebar-item [title]="'Quản lý nhân viên'">
+            <app-streamline-icon />
+          </app-sidebar-item>
+
+          <app-sidebar-item [title]="'Quản lý danh mục'">
+            <app-category-icon />
+          </app-sidebar-item>
+
+          <app-sidebar-item [title]="'Quản lý thương hiệu'">
+            <app-brand-cake-icon />
+          </app-sidebar-item>
+        </ul>
+      </section>
+    </nav>
+  </section>
+
+  <section class="sidebar-footer h-full justify-end bg-gray-2 pt-2">
+    <div class="divider my-0"></div>
+    <div class="dropdown z-50 flex h-fit w-full cursor-pointer hover:bg-gray-4">
+      <label
+        class="whites mx-2 flex h-fit w-full cursor-pointer p-0 hover:bg-gray-4"
+        tabindex="0"
+      >
+        <div class="flex flex-row gap-4 p-4">
+          <div class="avatar avatar-md">
+            <img src="https://i.pravatar.cc/150?img=30" alt="avatar" />
+          </div>
+
+          <div class="flex flex-col">
+            <span>Sandra Marx</span>
+            <span class="text-xs font-normal text-content2">sandra</span>
+          </div>
+        </div>
+      </label>
+
+      <div class="dropdown-menu-right-top dropdown-menu ml-2">
+        <a class="dropdown-item text-sm">Thông tin</a>
+        <a class="dropdown-item text-sm">Đăng xuất</a>
+      </div>
+    </div>
+  </section>
+</aside>
