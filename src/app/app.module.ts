@@ -8,7 +8,11 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 
 @NgModule({
   imports: [BrowserModule, AppRoutingModule],
-  declarations: [AppComponent, MainLayoutComponent, FooterComponent],
+  declarations: [
+    AppComponent,
+    MainLayoutComponent,
+    FooterComponent,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
