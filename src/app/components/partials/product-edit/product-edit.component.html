@@ -1,0 +1,116 @@
+<h1 class="my-4 text-xl">Thêm sản phẩm</h1>
+
+<form class="space-y-4">
+  <div class="flex w-full flex-col">
+    <label class="mb-2" for="name">Tên sản phẩm</label>
+    <input
+      class="input-ghost-primary input input-solid"
+      placeholder="Tên sản phẩm"
+      type="text"
+      id="name"
+    />
+  </div>
+
+  <div class="flex w-full flex-col">
+    <label class="mb-2" for="size">Kích thước</label>
+    <input
+      class="input-ghost-primary input input-solid"
+      placeholder="Kích thước"
+      type="size"
+      id="size"
+    />
+  </div>
+
+  <div class="flex w-full flex-col">
+    <label class="mb-2" for="weight">Trọng lượng</label>
+    <input
+      class="input-ghost-primary input input-solid"
+      placeholder="Trọng lượng"
+      type="weight"
+      id="weight"
+    />
+  </div>
+
+  <div class="flex w-full flex-col">
+    <label class="mb-2" for="price">Giá sản phẩm</label>
+    <input
+      class="input-ghost-primary input input-solid"
+      placeholder="Giá sản phẩm"
+      type="price"
+      id="price"
+    />
+  </div>
+
+  <div class="flex w-full flex-col">
+    <label class="mb-2" for="discount">Giảm giá</label>
+    <input
+      class="input-ghost-primary input input-solid"
+      placeholder="Giảm giá %"
+      type="discount"
+      id="discount"
+    />
+  </div>
+
+  <div class="w-ful flex flex-col">
+    <label class="mb-2" for="">Danh mục</label>
+    <select class="select-ghost-primary select">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+  </div>
+
+  <div class="flex w-full flex-col">
+    <h3 class="mb-2" for="">Thuộc tính</h3>
+    <div class="grid gap-y-4 w-full grid-cols-2">
+      <div class="flex items-center space-x-2">
+        <label>Property </label>
+        <input class="input-ghost-primary input input-solid" />
+      </div>
+      <div class="flex items-center space-x-2">
+        <label>Property </label>
+        <input class="input-ghost-primary input input-solid" />
+      </div>
+      <div class="flex space-x-2">
+        <label>Property </label>
+        <input class="input-ghost-primary input input-solid" />
+      </div>
+      <div class="flex space-x-2">
+        <label>Property </label>
+        <input class="input-ghost-primary input input-solid" />
+      </div>
+    </div>
+  </div>
+
+  <div class="w-ful flex flex-col">
+    <label class="mb-2" for="">Nhà cung cấp</label>
+    <select class="select-ghost-primary select">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+  </div>
+
+  <div class="w-ful flex flex-col">
+    <label class="mb-2" for="">Thương hiệu</label>
+    <select class="select-ghost-primary select">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+  </div>
+
+  <div class="flex w-full flex-col">
+    <label class="mb-2" for="description">Mô tả</label>
+    <textarea
+      class="textarea-ghost-primary textarea textarea-solid max-h-48 min-h-[10rem] max-w-2xl"
+      placeholder="Mô tả sản phẩm..."
+      rows="8"
+      id="description"
+    ></textarea>
+  </div>
+
+  <div class="mt-4">
+    <button type="button" class="btn-primary btn w-fit rounded-lg">Lưu</button>
+  </div>
+</form>

@@ -1,0 +1,8 @@
+<li
+  [routerLink]="['/admin/' + link]"
+  class="menu-item"
+  [class.menu-active]="isActiveMenu"
+>
+  <ng-content />
+  <span>{{ title }}</span>
+</li>
