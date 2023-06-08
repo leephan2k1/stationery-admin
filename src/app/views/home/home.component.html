@@ -1,7 +1,11 @@
 <div class="flex flex-row gap-10">
   <app-sidebar class="w-full max-w-[18rem]" />
 
-	<div class="flex flex-col p-4 w-full">
-		<app-products-container />
-	</div>
+  <div [ngSwitch]="session" class="flex w-full flex-col p-4">
+    <app-products-container *ngSwitchCase="'products'" />
+	<app-brand-container *ngSwitchCase="'brand'" />
+	<app-hr-container *ngSwitchCase="'hr'" />
+	<app-category-container *ngSwitchCase="'category'" />
+	<app-warehouse-container *ngSwitchCase="'warehouse'" />
+  </div>
 </div>
