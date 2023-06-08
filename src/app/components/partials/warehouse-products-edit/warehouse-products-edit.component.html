@@ -1,0 +1,36 @@
+<h1 class="my-4 text-xl">Thêm sản phẩm vào kho</h1>
+
+<form class="space-y-4">
+  <div class="w-ful flex flex-col">
+    <label class="mb-2" for="">Kho: </label>
+    <select class="select-ghost-primary select">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+  </div>
+
+  <div class="flex w-full flex-col">
+    <label class="mb-2" for="name">Sku sản phẩm</label>
+    <input
+      class="input-ghost-primary input input-solid"
+      placeholder="Sku sản phẩm..."
+      type="text"
+      id="sku"
+    />
+  </div>
+
+  <div class="flex w-full flex-col">
+    <label class="mb-2" for="name">Số lượng</label>
+    <input
+      class="input-ghost-primary input input-solid"
+      placeholder="Số lượng"
+      type="number"
+      id="quantity"
+    />
+  </div>
+
+  <div class="mt-4">
+    <button type="button" class="btn-primary btn w-fit rounded-lg">Thêm</button>
+  </div>
+</form>
