@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GuardIconComponent } from '../../icons/guard-icon/guard-icon.component';
 import { SidebarItemComponent } from '../sidebar-item/sidebar-item.component';
 import { CategoryIconComponent } from '../../icons/category-icon/category-icon.component';
 import { BrandCakeIconComponent } from '../../icons/brand-cake-icon/brand-cake-icon.component';
 import { StreamlineComponent } from '../../icons/streamline/streamline.component';
 import { WarehouseIconComponent } from '../../icons/warehouse-icon/warehouse-icon.component';
+import { ActivatedRoute } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,9 +16,26 @@ import { WarehouseIconComponent } from '../../icons/warehouse-icon/warehouse-ico
     CategoryIconComponent,
     BrandCakeIconComponent,
     StreamlineComponent,
-    WarehouseIconComponent
+    WarehouseIconComponent,
+    RouterModule,
   ],
   templateUrl: './sidebar.component.html',
   standalone: true,
 })
-export class SidebarComponent {}
+export class SidebarComponent implements OnInit {
+  session: string = '';
+  mode: string = '';
+
+  constructor(private readonly route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((value) => {
+      this.session = String(value.get('session'));
+      this.mode = String(value.get('mode'));
+    });
+  }
+
+  get isProductSession(): boolean {
+    return this.session === 'products';
+  }
+}

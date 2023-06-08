@@ -5,12 +5,16 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'admin',
+    redirectTo: 'admin/products/management',
     pathMatch: 'full',
   },
   {
-    path: 'admin',
-    pathMatch: 'full',
+    path: 'admin/:session/:mode',
+    loadComponent: () =>
+      import('./views/home/home.component').then((m) => m.HomeComponent),
+  },
+  {
+    path: 'admin/:session',
     loadComponent: () =>
       import('./views/home/home.component').then((m) => m.HomeComponent),
   },

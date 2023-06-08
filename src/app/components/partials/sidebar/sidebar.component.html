@@ -53,28 +53,57 @@
                 </svg>
               </span>
             </label>
-
-            <div class="menu-item-collapse">
+            <div
+              [class.menu-items]="isProductSession"
+              [class.menu-item-collapse]="!isProductSession"
+            >
               <div class="min-h-0">
-                <label class="menu-item ml-6">Thống kê doanh thu</label>
-                <label class="menu-item ml-6">Chỉnh sửa sản phẩm</label>
+                <label
+                  [class.menu-active]="mode === 'report'"
+                  class="menu-item ml-6"
+                  [routerLink]="['/admin/products/report']"
+                  >Thống kê doanh thu</label
+                >
+                <label
+                  [class.menu-active]="mode === 'management'"
+                  class="menu-item ml-6"
+                  [routerLink]="['/admin/products/management']"
+                  >Chỉnh sửa sản phẩm</label
+                >
               </div>
             </div>
           </li>
 
-          <app-sidebar-item [title]="'Quản lý kho'">
+          <app-sidebar-item
+            [title]="'Quản lý kho'"
+            [link]="'warehouse'"
+            [isActiveMenu]="session === 'warehouse'"
+          >
             <app-warehouse-icon />
           </app-sidebar-item>
 
-          <app-sidebar-item [title]="'Quản lý nhân viên'">
+          <app-sidebar-item
+            [title]="'Quản lý nhân viên'"
+            [link]="'hr'"
+            [isActiveMenu]="session === 'hr'"
+          >
             <app-streamline-icon />
           </app-sidebar-item>
 
-          <app-sidebar-item [title]="'Quản lý danh mục'">
+          <app-sidebar-item
+            [title]="'Quản lý danh mục'"
+            [link]="'category'"
+            [isActiveMenu]="session === 'category'"
+            
+          >
             <app-category-icon />
           </app-sidebar-item>
 
-          <app-sidebar-item [title]="'Quản lý thương hiệu'">
+          <app-sidebar-item
+            [title]="'Quản lý thương hiệu'"
+            [link]="'brand'"
+            [isActiveMenu]="session === 'brand'"
+          >
             <app-brand-cake-icon />
           </app-sidebar-item>
         </ul>
