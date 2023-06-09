@@ -3,32 +3,48 @@
 >
   <div class="flex flex-col items-center">
     <h1 class="text-3xl font-semibold">Đăng nhập</h1>
-    <p class="text-sm">đăng nhập vào tài khoản admin</p>
+    <p class="text-sm">đăng nhập vào tài khoản quản trị</p>
   </div>
-  <div class="form-group">
+  <form [formGroup]="authForm" (ngSubmit)="submitForm()" class="form-group">
     <div class="form-field">
       <label class="form-label">Địa chỉ email</label>
-
-      <input placeholder="Type here" type="email" class="input max-w-full" />
-      <!-- <label class="form-label">
-        <span class="form-label-alt">Please enter a valid email.</span>
-      </label> -->
+      <input
+        (focus)="clearErrors()"
+        placeholder="abc@gmail.com"
+        type="email"
+        formControlName="email"
+        class="input-ghost-primary input max-w-full"
+      />
     </div>
     <div class="form-field">
       <label class="form-label">Mật khẩu</label>
       <div class="form-control">
         <input
-          placeholder="Type here"
+          (focus)="clearErrors()"
+          placeholder="************"
           type="password"
-          class="input max-w-full"
+          formControlName="password"
+          class="input-ghost-primary input max-w-full"
         />
       </div>
     </div>
 
+    <label *ngIf="errors && errors.statusCode === 401" class="form-label">
+      <span class="form-label-alt text-rose-500"
+        >Email hoặc mật khẩu không đúng.</span
+      >
+    </label>
+
     <div class="form-field pt-5">
       <div class="form-control justify-between">
-        <button type="button" class="btn-primary btn w-full">Đăng nhập</button>
+        <button
+          [disabled]="!authForm.valid"
+          type="submit"
+          class="absolute-center btn-primary btn w-full"
+        >
+          Đăng nhập
+        </button>
       </div>
     </div>
-  </div>
+  </form>
 </div>
