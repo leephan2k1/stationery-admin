@@ -7,6 +7,7 @@ import { StreamlineComponent } from '../../icons/streamline/streamline.component
 import { WarehouseIconComponent } from '../../icons/warehouse-icon/warehouse-icon.component';
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -26,7 +27,10 @@ export class SidebarComponent implements OnInit {
   session: string = '';
   mode: string = '';
 
-  constructor(private readonly route: ActivatedRoute) {}
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((value) => {
@@ -37,5 +41,9 @@ export class SidebarComponent implements OnInit {
 
   get isProductSession(): boolean {
     return this.session === 'products';
+  }
+
+  handleLogout() {
+    this.userService.logout();
   }
 }

@@ -53,17 +53,17 @@ export class UserService {
   }
 
   logout() {
-    this.purgeAuth();
-    return this.http.get('/auth/sign-out', { withCredentials: true }).pipe(
-      tap({
-        next: () => {
+    this.http
+      .get('/auth/sign-out', { withCredentials: true })
+      .subscribe((response) => {
+        //@ts-ignore
+        if (response?.ok) {
+          this.purgeAuth();
           this.router.navigate(['/login']);
-        },
-        error: () => {
-          console.error('logout error!')
+        } else {
+          console.error('logout error');
         }
-      })
-    );
+      });
   }
 
   purgeAuth(): void {
