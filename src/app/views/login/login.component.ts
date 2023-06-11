@@ -1,20 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  Validators,
-  FormGroup,
-  FormControl,
-  ReactiveFormsModule,
-  FormsModule,
-} from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-
-import { CommonModule } from '@angular/common';
-import { UserService } from 'src/app/services/user.service';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AuthForm } from 'src/app/common/interfaces/authForm.interface';
 import { Credentials } from 'src/app/common/interfaces/credentials.interface';
 import { Errors } from 'src/app/models/error.response';
+import { UserService } from 'src/app/services/user.service';
+
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [FormsModule, ReactiveFormsModule, CommonModule],
@@ -50,7 +46,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userService.isAuthenticated
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((isAuth) => {
+        if (isAuth) {
+          this.router.navigate(['/']);
+        }
+      });
+  }
 
   submitForm() {
     this.isSubmitting = true;

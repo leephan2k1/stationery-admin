@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { distinctUntilChanged, map, tap } from 'rxjs/operators';
 
-import { map, distinctUntilChanged, tap, shareReplay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../models/user.model';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Credentials } from '../common/interfaces/credentials.interface';
 import { ApiResponse } from '../models/api.response';
+import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -15,12 +16,33 @@ export class UserService {
     .asObservable()
     .pipe(distinctUntilChanged());
 
-  public isAuthenticated = this.currentUser.pipe(map((user) => !!user));
+  public isAuthenticated = this.currentUser.pipe(
+    map((user) => {
+      return !!user;
+    })
+  );
 
   constructor(
     private readonly http: HttpClient,
     private readonly router: Router
   ) {}
+
+  getCurrentUser(): Observable<ApiResponse<User>> {
+    return this.http
+      .get<ApiResponse<User>>('/auth/status', { withCredentials: true })
+      .pipe(
+        tap({
+          next: ({ data }) => {
+            this.setAuth(data);
+          },
+          error: () => this.purgeAuth(),
+        })
+      );
+  }
+
+  setAuth(user: User): void {
+    this.currentUserSubject.next(user);
+  }
 
   login(credentials: Credentials): Observable<ApiResponse<User>> {
     return this.http
@@ -32,11 +54,16 @@ export class UserService {
 
   logout() {
     this.purgeAuth();
-    void this.router.navigate(['/login']);
-  }
-
-  setAuth(user: User): void {
-    this.currentUserSubject.next(user);
+    return this.http.get('/auth/sign-out', { withCredentials: true }).pipe(
+      tap({
+        next: () => {
+          this.router.navigate(['/login']);
+        },
+        error: () => {
+          console.error('logout error!')
+        }
+      })
+    );
   }
 
   purgeAuth(): void {

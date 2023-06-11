@@ -1,6 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './views/not-found/not-found.component';
+import { UserService } from './services/user.service';
+import { map } from 'rxjs/operators';
 
 const routes: Routes = [
   {
@@ -23,6 +25,9 @@ const routes: Routes = [
     pathMatch: 'full',
     loadComponent: () =>
       import('./views/login/login.component').then((m) => m.LoginComponent),
+    canActivate: [
+      () => inject(UserService).isAuthenticated.pipe(map((isAuth) => !isAuth)),
+    ],
   },
   {
     path: '**',
