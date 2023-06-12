@@ -5,12 +5,28 @@ import { EMPTY } from 'rxjs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ApiInterceptor } from './interceptors/api.interceptor';
-import { UserService } from './services/user.service';
+import {
+  UserService,
+  BrandService,
+  CategoryService,
+  SupplierService,
+  ProductService,
+} from './services';
+import { HotToastModule } from '@ngneat/hot-toast';
 
 @NgModule({
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    HotToastModule.forRoot(),
+  ],
   declarations: [AppComponent],
   providers: [
+    BrandService,
+    CategoryService,
+    SupplierService,
+    ProductService,
     {
       provide: APP_INITIALIZER,
       useFactory: (userService: UserService) => {

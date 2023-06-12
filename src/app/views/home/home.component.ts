@@ -1,24 +1,12 @@
 import { Subject } from 'rxjs';
-import {
-    BrandContainerComponent
-} from 'src/app/components/partials/brand-container/brand-container.component';
-import {
-    CategoryContainerComponent
-} from 'src/app/components/partials/category-container/category-container.component';
-import {
-    HrContainerComponent
-} from 'src/app/components/partials/hr-container/hr-container.component';
-import {
-    ProductsContainerComponent
-} from 'src/app/components/partials/products-container/products-container.component';
-import { SidebarComponent } from 'src/app/components/partials/sidebar/sidebar.component';
-import {
-    SupplierContainerComponent
-} from 'src/app/components/partials/supplier-container/supplier-container.component';
-import {
-    WarehouseContainerComponent
-} from 'src/app/components/partials/warehouse-container/warehouse-container.component';
-import { UserService } from 'src/app/services/user.service';
+import { BrandContainerComponent } from '~/components/partials/brand-container/brand-container.component';
+import { CategoryContainerComponent } from '~/components/partials/category-container/category-container.component';
+import { HrContainerComponent } from '~/components/partials/hr-container/hr-container.component';
+import { ProductsContainerComponent } from '~/components/partials/products-container/products-container.component';
+import { SidebarComponent } from '~/components/partials/sidebar/sidebar.component';
+import { SupplierContainerComponent } from '~/components/partials/supplier-container/supplier-container.component';
+import { WarehouseContainerComponent } from '~/components/partials/warehouse-container/warehouse-container.component';
+import { UserService } from '~/services';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -61,11 +49,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userService.isAuthenticated
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((isAuth) => {
-      if (!isAuth) {
-        this.router.navigate(['/login']);
-      }
-    });
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((isAuth) => {
+        if (!isAuth) {
+          this.router.navigate(['/login']);
+        }
+      });
   }
 }

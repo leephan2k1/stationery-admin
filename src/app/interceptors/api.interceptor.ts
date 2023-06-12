@@ -5,8 +5,8 @@ import {
   HttpHandler,
   HttpRequest,
 } from '@angular/common/http';
-import { Observable } from 'rxjs'; 
-import { environment } from 'src/environments/enviroment';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/enviroment';
 
 @Injectable({ providedIn: 'root' })
 export class ApiInterceptor implements HttpInterceptor {
@@ -14,7 +14,7 @@ export class ApiInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const apiReq = req.clone({ url: environment.BASE_URL + req.url  });
+    const apiReq = req.clone({ url: environment.BASE_URL + req.url });
     return next.handle(apiReq);
   }
 }
