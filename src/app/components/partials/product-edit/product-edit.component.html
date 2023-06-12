@@ -1,13 +1,23 @@
 <h1 class="my-4 text-xl">Thêm sản phẩm</h1>
 
-<form class="space-y-4">
+<form [formGroup]="productForm" (ngSubmit)="submitForm()" class="space-y-4">
   <div class="flex w-full flex-col">
     <label class="mb-2" for="name">Tên sản phẩm</label>
     <input
       class="input-ghost-primary input input-solid"
       placeholder="Tên sản phẩm"
+      formControlName="name"
       type="text"
       id="name"
+    />
+  </div>
+
+  <div class="flex w-full flex-col">
+    <label class="mb-2" for="name">Ảnh sản phẩm</label>
+    <input
+      type="file"
+      formControlName="thumbnail"
+      class="input-file input-file-primary"
     />
   </div>
 
@@ -16,7 +26,8 @@
     <input
       class="input-ghost-primary input input-solid"
       placeholder="Kích thước"
-      type="size"
+      formControlName="size"
+      type="text"
       id="size"
     />
   </div>
@@ -26,7 +37,8 @@
     <input
       class="input-ghost-primary input input-solid"
       placeholder="Trọng lượng"
-      type="weight"
+      formControlName="weight"
+      type="number"
       id="weight"
     />
   </div>
@@ -36,7 +48,8 @@
     <input
       class="input-ghost-primary input input-solid"
       placeholder="Giá sản phẩm"
-      type="price"
+      type="number"
+      formControlName="price"
       id="price"
     />
   </div>
@@ -46,57 +59,72 @@
     <input
       class="input-ghost-primary input input-solid"
       placeholder="Giảm giá %"
-      type="discount"
+      type="number"
+      formControlName="discount_percent"
       id="discount"
     />
   </div>
 
-  <div class="w-ful flex flex-col">
-    <label class="mb-2" for="">Danh mục</label>
-    <select class="select-ghost-primary select">
-      <option>Option 1</option>
-      <option>Option 2</option>
-      <option>Option 3</option>
+  <div *ngIf="categories && categories.length > 0" class="w-ful flex flex-col">
+    <label class="mb-2">Danh mục</label>
+    <select formControlName="category" class="select-ghost-primary select">
+      <option
+        *ngFor="let category of categories; trackBy: trackByFn"
+        [value]="category.id"
+      >
+        {{ category.name }}
+      </option>
     </select>
   </div>
 
-  <div class="flex w-full flex-col">
-    <h3 class="mb-2" for="">Thuộc tính</h3>
-    <div class="grid gap-y-4 w-full grid-cols-2">
-      <div class="flex items-center space-x-2">
-        <label>Property </label>
-        <input class="input-ghost-primary input input-solid" />
-      </div>
-      <div class="flex items-center space-x-2">
-        <label>Property </label>
-        <input class="input-ghost-primary input input-solid" />
-      </div>
-      <div class="flex space-x-2">
-        <label>Property </label>
-        <input class="input-ghost-primary input input-solid" />
-      </div>
-      <div class="flex space-x-2">
-        <label>Property </label>
-        <input class="input-ghost-primary input input-solid" />
+  <div class="flex w-full flex-col space-y-4">
+    <h3 class="mb-2">Thuộc tính theo</h3>
+    <select
+      (change)="handleChangeProdType($event)"
+      class="select-ghost-primary select"
+    >
+      <option *ngFor="let prodType of productTypes; trackBy: trackByFn">
+        {{ prodType }}
+      </option>
+    </select>
+    <div
+      formGroupName="specific_properties"
+      class="grid w-full grid-cols-2 gap-4"
+    >
+      <div
+        *ngFor="let selection of productSelections"
+        class="flex items-center space-x-2"
+      >
+        <label class="w-[6rem]">{{ selection.label }}</label>
+        <input
+          [formControlName]="selection.value"
+          class="input-ghost-primary input input-solid"
+        />
       </div>
     </div>
   </div>
 
   <div class="w-ful flex flex-col">
-    <label class="mb-2" for="">Nhà cung cấp</label>
-    <select class="select-ghost-primary select">
-      <option>Option 1</option>
-      <option>Option 2</option>
-      <option>Option 3</option>
+    <label class="mb-2">Nhà cung cấp</label>
+    <select class="select-ghost-primary select" formControlName="supplier">
+      <option
+        *ngFor="let supplier of suppliers; trackBy: trackByFn"
+        [value]="supplier.id"
+      >
+        {{ supplier.name }}
+      </option>
     </select>
   </div>
 
   <div class="w-ful flex flex-col">
-    <label class="mb-2" for="">Thương hiệu</label>
-    <select class="select-ghost-primary select">
-      <option>Option 1</option>
-      <option>Option 2</option>
-      <option>Option 3</option>
+    <label class="mb-2">Thương hiệu</label>
+    <select class="select-ghost-primary select" formControlName="brand">
+      <option
+        *ngFor="let brand of brands; trackBy: trackByFn"
+        [value]="brand.id"
+      >
+        {{ brand.name }}
+      </option>
     </select>
   </div>
 
@@ -107,10 +135,11 @@
       placeholder="Mô tả sản phẩm..."
       rows="8"
       id="description"
+      formControlName="description"
     ></textarea>
   </div>
 
   <div class="mt-4">
-    <button type="button" class="btn-primary btn w-fit rounded-lg">Lưu</button>
+    <button type="submit" class="btn-primary btn w-fit rounded-lg">Lưu</button>
   </div>
 </form>

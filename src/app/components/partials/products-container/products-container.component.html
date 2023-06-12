@@ -1,5 +1,9 @@
 <div class="flex w-full max-w-4xl flex-col overflow-x-auto">
   <app-product-show />
   <div class="divider"></div>
-  <app-product-edit />
+  <app-product-edit
+    [categories]="categories"
+    [brands]="brands"
+    [suppliers]="suppliers"
+  />
 </div>

@@ -7,7 +7,7 @@ import { StreamlineComponent } from '../../icons/streamline/streamline.component
 import { WarehouseIconComponent } from '../../icons/warehouse-icon/warehouse-icon.component';
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '~/services';
 
 @Component({
   selector: 'app-sidebar',

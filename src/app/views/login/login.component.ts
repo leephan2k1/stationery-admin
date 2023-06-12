@@ -1,14 +1,17 @@
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AuthForm } from 'src/app/common/interfaces/authForm.interface';
-import { Credentials } from 'src/app/common/interfaces/credentials.interface';
-import { Errors } from 'src/app/models/error.response';
-import { UserService } from 'src/app/services/user.service';
-
+import { AuthForm } from '~/common/interfaces/authForm.interface';
+import { Credentials } from '~/common/interfaces/credentials.interface';
+import { Errors } from '~/models/error.response';
+import { UserService } from '~/services';
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 

@@ -1,11 +1,6 @@
-import {
-    Validators,
-    FormGroup,
-    FormControl,
-    ReactiveFormsModule,
-  } from "@angular/forms";
+import { FormControl } from '@angular/forms';
 
 export interface AuthForm {
-    email: FormControl<string>;
-    password: FormControl<string>;
+  email: FormControl<string>;
+  password: FormControl<string>;
 }
