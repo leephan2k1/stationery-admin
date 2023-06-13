@@ -7,6 +7,7 @@ export interface ApiResponse<T> extends BaseResponse {
   data: T;
 }
 
-export interface ApiResponseList<T> extends BaseResponse{
+export interface ApiResponseList<T> extends BaseResponse {
+  count: number;
   data: T[];
 }

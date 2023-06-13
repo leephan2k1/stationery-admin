@@ -137,8 +137,6 @@ export class ProductEditComponent implements OnDestroy {
       'specific_properties',
       new FormGroup(propertiesForm)
     );
-
-    console.log('this.productForm: ', this.productForm);
   }
 
   handleChangeProdType($event: any) {

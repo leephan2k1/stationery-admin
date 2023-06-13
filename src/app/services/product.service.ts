@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '~/models/product.model';
 import { Observable } from 'rxjs';
-import { ApiResponse } from '~/models';
+import { ApiResponse, ApiResponseList } from '~/models';
+import { GetProductsQuery } from '~/common/interfaces/get-products.query';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,20 @@ export class ProductService {
   createProduct(prod: Product): Observable<ApiResponse<Product>> {
     return this.http.post<ApiResponse<Product>>(`/products`, prod, {
       withCredentials: true,
+    });
+  }
+
+  getProducts({
+    page,
+    order,
+    limit,
+  }: GetProductsQuery): Observable<ApiResponseList<Product>> {
+    return this.http.get<ApiResponseList<Product>>('/products', {
+      params: {
+        page,
+        order,
+        limit,
+      },
     });
   }
 }
