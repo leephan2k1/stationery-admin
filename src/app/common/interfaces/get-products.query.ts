@@ -1,5 +1,5 @@
 export interface GetProductsQuery {
   page: number;
   limit: number;
-  order: 'desc' | 'asc';
+  sort: 'desc' | 'asc';
 }

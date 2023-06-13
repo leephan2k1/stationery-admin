@@ -1,8 +1,8 @@
 <h1 class="my-4 text-xl">Sản phẩm hiện có</h1>
 
 <div class="my-4 flex space-x-4">
-  <button class="btn w-[10rem] space-x-2">
-    <span>Mới nhất</span>
+  <button (click)="onToggleOrder()" class="btn w-[10rem] space-x-2">
+    <span>{{ order === "desc" ? "Cũ nhất" : "Mới nhất" }}</span>
     <svg
       class="rotate-90"
       xmlns="http://www.w3.org/2000/svg"
@@ -20,6 +20,8 @@
   <div class="form-control relative w-full">
     <input
       type="text"
+      [(ngModel)]="productSearchName"
+      (keyup)="onSearchName()"
       class="input-ghost-primary input-lg input max-w-full pl-10"
       placeholder="Tìm kiếm tên sản phẩm..."
     />
@@ -67,7 +69,7 @@
       </tr>
     </ng-template>
 
-    <ng-template [ngIf]="products && products.length > 0">
+    <ng-template [ngIf]="!isFetching && products && products.length > 0">
       <tr *ngFor="let prod of products">
         <th>{{ prod.product_slug }}</th>
         <td>{{ prod.name }}</td>

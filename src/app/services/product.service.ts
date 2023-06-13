@@ -19,13 +19,13 @@ export class ProductService {
 
   getProducts({
     page,
-    order,
+    sort,
     limit,
   }: GetProductsQuery): Observable<ApiResponseList<Product>> {
     return this.http.get<ApiResponseList<Product>>('/products', {
       params: {
         page,
-        order,
+        sort,
         limit,
       },
     });
