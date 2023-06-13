@@ -18,12 +18,10 @@
   </button>
 
   <div class="form-control relative w-full">
-    <input
-      type="text"
-      [(ngModel)]="productSearchName"
-      (keyup)="onSearchName()"
-      class="input-ghost-primary input-lg input max-w-full pl-10"
-      placeholder="Tìm kiếm tên sản phẩm..."
+    <app-input
+      class="w-full"
+      (messageEvent)="onSearchName($event)"
+      [placeHolder]="'Tìm kiếm tên sản phẩm...'"
     />
 
     <span class="absolute inset-y-0 left-3 inline-flex items-center">

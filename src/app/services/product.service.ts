@@ -18,16 +18,19 @@ export class ProductService {
   }
 
   getProducts({
+    name,
     page,
     sort,
     limit,
   }: GetProductsQuery): Observable<ApiResponseList<Product>> {
+    const params = new Map();
+    if (name) params.set('name', name);
+    params.set('page', page);
+    params.set('sort', sort);
+    params.set('limit', limit);
+
     return this.http.get<ApiResponseList<Product>>('/products', {
-      params: {
-        page,
-        sort,
-        limit,
-      },
+      params: Object.fromEntries(params),
     });
   }
 }

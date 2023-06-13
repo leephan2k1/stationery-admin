@@ -7,9 +7,10 @@ import { Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
+import { InputComponent } from '~/components/shared/input/input.component';
 
 @Component({
-  imports: [CommonModule, PaginationComponent, FormsModule],
+  imports: [CommonModule, PaginationComponent, FormsModule, InputComponent],
   selector: 'app-product-show',
   templateUrl: './product-show.component.html',
   standalone: true,
@@ -22,8 +23,12 @@ export class ProductShowComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   totalPages: number = 0;
   destroy$ = new Subject<void>();
-  productSearchName: string = '';
-  private limit = 5;
+
+  private isCahed = false;
+  private productsCached: Product[] = [];
+  private totalPagesCached: number = 0;
+  private limit: number = 5;
+  searchTerm: string = '';
 
   constructor(
     private readonly prodService: ProductService,
@@ -48,11 +53,27 @@ export class ProductShowComponent implements OnInit, OnDestroy {
       queryParams: { order: this.order },
       queryParamsHandling: 'merge',
     });
-    this.handleFetchingProds();
   }
 
-  onSearchName() {
-    console.log('name: ', this.productSearchName);
+  onSearchName(term: string) {
+    this.searchTerm = term.trim();
+    if (term) {
+      if (!this.isCahed) {
+        this.productsCached = [...this.products];
+        this.totalPagesCached = this.totalPages;
+        this.isCahed = true;
+      }
+      this.router.navigate(['.'], {
+        relativeTo: this.route,
+        queryParams: { page: 1 },
+        queryParamsHandling: 'merge',
+      });
+      this.handleFetchingProds();
+    } else if (term === '') {
+      this.products = [...this.productsCached];
+      this.totalPages = this.totalPagesCached;
+      this.isCahed = false;
+    }
   }
 
   private onPageChange() {
@@ -69,10 +90,11 @@ export class ProductShowComponent implements OnInit, OnDestroy {
       });
   }
 
-  private handleFetchingProds() {
+  handleFetchingProds() {
     this.isFetching = true;
     this.prodService
       .getProducts({
+        name: this.searchTerm,
         limit: this.limit,
         sort: this.order,
         page: this.page,

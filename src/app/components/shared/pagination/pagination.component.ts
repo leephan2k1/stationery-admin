@@ -45,25 +45,29 @@ export class PaginationComponent implements OnInit, OnDestroy {
       .subscribe((params) => {
         // @ts-ignore
         const page = Number(params?.page);
-        if (page !== 0) {
-          this.currentPage = page;
-
-          let tempArr: number[] = [];
-          if (this.totalPages > 4) {
-            [page - 2, page - 1, page, page + 1].map((e) => {
-              if (e > 0 && e < this.totalPages) {
-                tempArr.push(e);
-              }
-            });
-          } else {
-            tempArr = Array.from(new Array(this.totalPages).keys()).map(
-              (e) => e + 1
-            );
-          }
-
-          this.listNumOfPage = tempArr;
-        }
+        this.genListPagination(page);
       });
+  }
+
+  private genListPagination(page: number) {
+    if (page !== 0) {
+      this.currentPage = page;
+
+      let tempArr: number[] = [];
+      if (this.totalPages > 4) {
+        [page - 2, page - 1, page, page + 1].map((e) => {
+          if (e > 0 && e < this.totalPages) {
+            tempArr.push(e);
+          }
+        });
+      } else {
+        tempArr = Array.from(new Array(this.totalPages).keys()).map(
+          (e) => e + 1
+        );
+      }
+
+      this.listNumOfPage = tempArr;
+    }
   }
 
   onClickPageNumber(page: number) {
