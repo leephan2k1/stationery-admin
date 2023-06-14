@@ -68,7 +68,20 @@ export class WarehouseShowComponent implements OnInit, OnDestroy {
   }
 
   handleDeleteWarehouse(id: string) {
-    console.log('id: ', id);
+    this.isFetching = true;
+    this.warehouseService
+      .deleteWarehouse(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.toast.success('Xoá kho thành công!');
+          this.handleFetchingWarehouses();
+        },
+        error: () => {
+          this.toast.error('Opps! Lỗi');
+        },
+      });
+    this.isFetching = false;
   }
 
   private handleFetchingWarehouses() {

@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseQuery } from '~/common/interfaces/base.query';
 import { Observable } from 'rxjs';
-import { ApiResponseList, Warehouse } from '~/models';
+import { ApiResponse, ApiResponseList, Warehouse } from '~/models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WarehouseService {
+  private basePath: string = 'warehouses';
   constructor(private readonly http: HttpClient) {}
 
   getWarehouses({
@@ -22,8 +23,14 @@ export class WarehouseService {
     params.set('sort', sort);
     params.set('limit', limit);
 
-    return this.http.get<ApiResponseList<Warehouse>>('/warehouses', {
+    return this.http.get<ApiResponseList<Warehouse>>(`/${this.basePath}`, {
       params: Object.fromEntries(params),
+    });
+  }
+
+  deleteWarehouse(id: string): Observable<ApiResponse<Warehouse>> {
+    return this.http.delete<ApiResponse<Warehouse>>(`/${this.basePath}/${id}`, {
+      withCredentials: true,
     });
   }
 }
