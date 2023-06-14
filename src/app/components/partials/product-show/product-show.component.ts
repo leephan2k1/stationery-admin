@@ -8,9 +8,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
 import { InputComponent } from '~/components/shared/input/input.component';
+import { ConfirmModalComponent } from '~/components/shared/confirm-modal/confirm-modal.component';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
-  imports: [CommonModule, PaginationComponent, FormsModule, InputComponent],
+  imports: [
+    CommonModule,
+    PaginationComponent,
+    FormsModule,
+    InputComponent,
+    ConfirmModalComponent,
+  ],
   selector: 'app-product-show',
   templateUrl: './product-show.component.html',
   standalone: true,
@@ -24,13 +32,14 @@ export class ProductShowComponent implements OnInit, OnDestroy {
   totalPages: number = 0;
   destroy$ = new Subject<void>();
 
-  private isCahed = false;
+  private isCached = false;
   private productsCached: Product[] = [];
   private totalPagesCached: number = 0;
   private limit: number = 5;
   searchTerm: string = '';
 
   constructor(
+    private readonly toast: HotToastService,
     private readonly prodService: ProductService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
@@ -58,10 +67,10 @@ export class ProductShowComponent implements OnInit, OnDestroy {
   onSearchName(term: string) {
     this.searchTerm = term.trim();
     if (term) {
-      if (!this.isCahed) {
+      if (!this.isCached) {
         this.productsCached = [...this.products];
         this.totalPagesCached = this.totalPages;
-        this.isCahed = true;
+        this.isCached = true;
       }
       this.router.navigate(['.'], {
         relativeTo: this.route,
@@ -72,7 +81,7 @@ export class ProductShowComponent implements OnInit, OnDestroy {
     } else if (term === '') {
       this.products = [...this.productsCached];
       this.totalPages = this.totalPagesCached;
-      this.isCahed = false;
+      this.isCached = false;
     }
   }
 
@@ -117,5 +126,25 @@ export class ProductShowComponent implements OnInit, OnDestroy {
           this.isFetching = false;
         },
       });
+  }
+
+  handleDeleteProduct(prodSlug: string) {
+    this.prodService
+      .deleteProduct(prodSlug)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.toast.success('Xoá thành công!');
+          //refresh products
+          this.handleFetchingProds();
+        },
+        error: () => {
+          this.toast.error('Oops! Xảy ra lỗi, thử lại sau!');
+        },
+      });
+  }
+
+  trackByFn(index: number, item: any) {
+    return item?.id || index;
   }
 }

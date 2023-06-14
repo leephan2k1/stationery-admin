@@ -33,4 +33,10 @@ export class ProductService {
       params: Object.fromEntries(params),
     });
   }
+
+  deleteProduct(prodSlug: string): Observable<ApiResponse<Product>> {
+    return this.http.delete<ApiResponse<Product>>(`/products/${prodSlug}`, {
+      withCredentials: true,
+    });
+  }
 }
