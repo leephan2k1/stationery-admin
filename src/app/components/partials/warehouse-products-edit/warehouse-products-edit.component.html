@@ -1,16 +1,29 @@
 <h1 class="my-4 text-xl">Thêm sản phẩm vào kho</h1>
 
-<form class="space-y-4">
-  <div class="w-ful flex flex-col">
-    <label class="mb-2" for="">Kho: </label>
-    <select class="select-ghost-primary select">
-      1
+<form
+  [formGroup]="addProdWarehouse"
+  (ngSubmit)="submitForm()"
+  class="space-y-4"
+>
+  <div
+    *ngIf="warehouses && warehouses.length > 0"
+    class="w-ful form-field flex flex-col"
+  >
+    <label class="mb-2">Kho: </label>
+    <select formControlName="warehouseId" class="select-ghost-primary select">
+      <option
+        *ngFor="let opt of warehouses; trackBy: trackByFn"
+        [value]="opt.id"
+      >
+        {{ opt.name }}
+      </option>
     </select>
   </div>
 
-  <div class="flex w-full flex-col">
-    <label class="mb-2" for="name">Sku sản phẩm</label>
+  <div class="form-field flex w-full flex-col">
+    <label class="mb-2" for="sku">Sku sản phẩm</label>
     <input
+      formControlName="sku"
       class="input-ghost-primary input input-solid"
       placeholder="Sku sản phẩm..."
       type="text"
@@ -18,17 +31,24 @@
     />
   </div>
 
-  <div class="flex w-full flex-col">
-    <label class="mb-2" for="name">Số lượng</label>
+  <div class="form-field flex w-full flex-col">
+    <label class="mb-2" for="quantity">Số lượng</label>
     <input
       class="input-ghost-primary input input-solid"
       placeholder="Số lượng"
       type="number"
+      formControlName="quantity"
       id="quantity"
     />
   </div>
 
   <div class="mt-4">
-    <button type="button" class="btn-primary btn w-fit rounded-lg">Thêm</button>
+    <button
+      [disabled]="!addProdWarehouse.valid"
+      type="submit"
+      class="btn-primary btn w-fit rounded-lg"
+    >
+      Thêm
+    </button>
   </div>
 </form>

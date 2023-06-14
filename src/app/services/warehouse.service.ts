@@ -42,6 +42,24 @@ export class WarehouseService {
     );
   }
 
+  updateProdToWarehouse({
+    idWh,
+    sku,
+    quantity,
+  }: {
+    idWh: string;
+    sku: string;
+    quantity: number;
+  }): Observable<ApiResponse<Warehouse>> {
+    return this.http.put<ApiResponse<Warehouse>>(
+      `/${this.basePath}/${idWh}`,
+      {
+        products: [{ sku, quantity }],
+      },
+      { withCredentials: true }
+    );
+  }
+
   deleteWarehouse(id: string): Observable<ApiResponse<Warehouse>> {
     return this.http.delete<ApiResponse<Warehouse>>(`/${this.basePath}/${id}`, {
       withCredentials: true,
