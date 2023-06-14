@@ -20,6 +20,15 @@ export class CategoryService {
     });
   }
 
+  public addCategory(payload: {
+    name: string;
+    parentCategory?: string;
+  }): Observable<ApiResponse<Category>> {
+    return this.http.post<ApiResponse<Category>>('/categories', payload, {
+      withCredentials: true,
+    });
+  }
+
   public deleteCategory(slug: string): Observable<ApiResponse<Category>> {
     return this.http.delete<ApiResponse<Category>>(`/categories/${slug}`, {
       withCredentials: true,

@@ -1,27 +1,35 @@
 <h1 class="my-4 text-xl">Chỉnh sửa danh mục</h1>
 
-<form class="space-y-4">
+<form [formGroup]="categoryForm" (ngSubmit)="submitForm()" class="space-y-4">
   <div class="flex w-full flex-col">
     <label class="mb-2" for="name">Tên danh mục</label>
     <input
       class="input-ghost-primary input input-solid"
       placeholder="Tên danh mục..."
+      formControlName="name"
       type="text"
       id="name"
     />
   </div>
 
   <div class="flex w-full flex-col">
-    <label class="mb-2" for="name">ID danh mục cha</label>
+    <label class="mb-2" for="parentCategory">ID danh mục cha</label>
     <input
       class="input-ghost-primary input input-solid"
+      formControlName="parentCategory"
       placeholder="ID danh mục cha..."
       type="text"
-      id="name"
+      id="parentCategory"
     />
   </div>
 
   <div class="mt-4">
-    <button type="button" class="btn-primary btn w-fit rounded-lg">Lưu</button>
+    <button
+      [disabled]="!categoryForm.valid"
+      type="submit"
+      class="btn-primary btn w-fit rounded-lg"
+    >
+      Lưu
+    </button>
   </div>
 </form>
