@@ -6,8 +6,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Credentials } from '../common/interfaces/credentials.interface';
-import { ApiResponse } from '../models/api.response';
+import { ApiResponse, ApiResponseList } from '../models/api.response';
 import { User } from '../models/user.model';
+import { BaseQuery } from '~/common/interfaces/base.query';
+import { GetUserQuery } from '~/services/get-user.query';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -26,6 +28,34 @@ export class UserService {
     private readonly http: HttpClient,
     private readonly router: Router
   ) {}
+
+  getUsers({
+    page,
+    sort,
+    limit,
+    name,
+    role,
+    permission,
+  }: GetUserQuery): Observable<ApiResponseList<User>> {
+    const params = new Map();
+    if (name) params.set('name', name);
+    if (role) params.set('role', role);
+    if (permission) params.set('permission', permission);
+    params.set('page', page);
+    params.set('sort', sort);
+    params.set('limit', limit);
+
+    return this.http.get<ApiResponseList<User>>(`/users`, {
+      params: Object.fromEntries(params),
+      withCredentials: true,
+    });
+  }
+
+  deleteUser(id: string): Observable<ApiResponse<User>> {
+    return this.http.delete<ApiResponse<User>>(`/users/${id}`, {
+      withCredentials: true,
+    });
+  }
 
   getCurrentUser(): Observable<ApiResponse<User>> {
     return this.http
