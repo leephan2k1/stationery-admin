@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Queries } from '../common/interfaces/listQuery.interface';
-import { ApiResponseList } from '../models/api.response';
-import { Category } from '../models/category.model';
+import { ApiResponse, ApiResponseList } from '~/models';
+import { Category } from '~/models';
+import { Queries } from '~/common/interfaces/listQuery.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +17,12 @@ export class CategoryService {
   }: Queries): Observable<ApiResponseList<Category>> {
     return this.http.get<ApiResponseList<Category>>('/categories', {
       params: { page, limit },
+    });
+  }
+
+  public deleteCategory(slug: string): Observable<ApiResponse<Category>> {
+    return this.http.delete<ApiResponse<Category>>(`/categories/${slug}`, {
+      withCredentials: true,
     });
   }
 }
