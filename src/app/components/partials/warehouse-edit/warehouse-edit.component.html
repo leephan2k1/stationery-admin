@@ -1,27 +1,35 @@
 <h1 class="my-4 text-xl">Thêm kho hàng</h1>
 
-<form class="space-y-4">
-  <div class="flex w-full flex-col">
+<form [formGroup]="addWhForm" (ngSubmit)="submitForm()" class="space-y-4">
+  <div class="form-field flex w-full flex-col">
     <label class="mb-2" for="name">Tên kho</label>
     <input
       class="input-ghost-primary input input-solid"
       placeholder="Tên kho..."
       type="text"
+      formControlName="name"
       id="name"
     />
   </div>
 
-  <div class="flex w-full flex-col">
-    <label class="mb-2" for="name">Vị trí</label>
+  <div class="form-field flex w-full flex-col">
+    <label class="mb-2" for="location">Vị trí</label>
     <input
       class="input-ghost-primary input input-solid"
       placeholder="Vị trí kho..."
       type="text"
-      id="name"
+      formControlName="location"
+      id="location"
     />
   </div>
 
   <div class="mt-4">
-    <button type="button" class="btn-primary btn w-fit rounded-lg">Lưu</button>
+    <button
+      [disabled]="!addWhForm.valid"
+      type="submit"
+      class="btn-primary btn w-fit rounded-lg"
+    >
+      Lưu
+    </button>
   </div>
 </form>

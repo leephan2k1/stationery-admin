@@ -9,6 +9,7 @@ import { ApiResponse, ApiResponseList, Warehouse } from '~/models';
 })
 export class WarehouseService {
   private basePath: string = 'warehouses';
+  warehouses: Warehouse[] = [];
   constructor(private readonly http: HttpClient) {}
 
   getWarehouses({
@@ -26,6 +27,19 @@ export class WarehouseService {
     return this.http.get<ApiResponseList<Warehouse>>(`/${this.basePath}`, {
       params: Object.fromEntries(params),
     });
+  }
+
+  addWarehouse(payload: {
+    name: string;
+    location: string;
+  }): Observable<ApiResponse<Warehouse>> {
+    return this.http.post<ApiResponse<Warehouse>>(
+      `/${this.basePath}`,
+      payload,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   deleteWarehouse(id: string): Observable<ApiResponse<Warehouse>> {
