@@ -9,7 +9,7 @@ export class ConfirmModalComponent {
   private id: string = '';
 
   @Input()
-  index: number = 0;
+  index: string = '';
 
   @Output()
   messageEvent = new EventEmitter<void>();

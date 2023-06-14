@@ -1,9 +1,9 @@
 <ng-content />
 <div class="modal">
-  <label class="modal-overlay" [for]="'modal-' + index"></label>
+  <label class="modal-overlay" [for]="index"></label>
   <div class="modal-content flex min-h-[15rem] min-w-[20rem] flex-col gap-5">
     <label
-      [for]="'modal-' + index"
+      [for]="index"
       class="btn-sm btn-circle btn-ghost btn absolute right-2 top-2"
       >✕</label
     >
@@ -12,13 +12,13 @@
     <div class="mt-auto flex gap-3">
       <label
         class="btn-error btn-block btn"
-        [for]="'modal-' + index"
+        [for]="index"
         (click)="handleConfirm()"
       >
         Xoá
       </label>
 
-      <label [for]="'modal-' + index" class="btn-block btn">Huỷ</label>
+      <label [for]="index" class="btn-block btn">Huỷ</label>
     </div>
   </div>
 </div>

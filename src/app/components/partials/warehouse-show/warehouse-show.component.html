@@ -63,23 +63,35 @@
         </tr>
       </ng-template>
       <ng-template [ngIf]="!isFetching && warehouses && warehouses.length > 0">
-        <tr *ngFor="let wh of warehouses; trackBy: trackByFn">
+        <tr *ngFor="let wh of warehouses; trackBy: trackByFn; let i = index">
           <th>{{ wh.id }}</th>
           <td>{{ wh.name }}</td>
           <td>{{ wh.location }}</td>
           <td>{{ wh.products.length }}</td>
           <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
+            <app-confirm-modal
+              [index]="'warehouse-delete' + i"
+              (messageEvent)="handleDeleteWarehouse(wh.id)"
             >
-              <path
-                fill="currentColor"
-                d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v10zM18 4h-2.5l-.71-.71c-.18-.18-.44-.29-.7-.29H9.91c-.26 0-.52.11-.7.29L8.5 4H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1z"
+              <label class="cursor-pointer" [for]="'warehouse-delete' + i">
+                <svg
+                  class="transition-all duration-200 hover:text-error"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v10zM18 4h-2.5l-.71-.71c-.18-.18-.44-.29-.7-.29H9.91c-.26 0-.52.11-.7.29L8.5 4H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1z"
+                  /></svg
+              ></label>
+              <input
+                class="modal-state"
+                [id]="'warehouse-delete' + i"
+                type="checkbox"
               />
-            </svg>
+            </app-confirm-modal>
           </td>
         </tr>
       </ng-template>

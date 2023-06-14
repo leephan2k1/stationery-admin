@@ -7,9 +7,10 @@ import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { CommonModule, NgForOf } from '@angular/common';
+import { ConfirmModalComponent } from '~/components/shared/confirm-modal/confirm-modal.component';
 
 @Component({
-  imports: [PaginationComponent, NgForOf, CommonModule],
+  imports: [PaginationComponent, NgForOf, CommonModule, ConfirmModalComponent],
   selector: 'app-warehouse-show',
   templateUrl: './warehouse-show.component.html',
   standalone: true,
@@ -64,6 +65,10 @@ export class WarehouseShowComponent implements OnInit, OnDestroy {
         if (order) this.order = order;
         this.handleFetchingWarehouses();
       });
+  }
+
+  handleDeleteWarehouse(id: string) {
+    console.log('id: ', id);
   }
 
   private handleFetchingWarehouses() {
