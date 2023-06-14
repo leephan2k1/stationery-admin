@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from '~/models/product.model';
 import { Observable } from 'rxjs';
 import { ApiResponse, ApiResponseList } from '~/models';
-import { GetProductsQuery } from '~/common/interfaces/get-products.query';
+import { BaseQuery } from '~/common/interfaces/base.query';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ export class ProductService {
     page,
     sort,
     limit,
-  }: GetProductsQuery): Observable<ApiResponseList<Product>> {
+  }: BaseQuery): Observable<ApiResponseList<Product>> {
     const params = new Map();
     if (name) params.set('name', name);
     params.set('page', page);

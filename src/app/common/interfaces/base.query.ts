@@ -1,4 +1,4 @@
-export interface GetProductsQuery {
+export interface BaseQuery {
   page: number;
   limit: number;
   sort: 'desc' | 'asc';

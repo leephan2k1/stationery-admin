@@ -6,11 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ApiInterceptor } from './interceptors/api.interceptor';
 import {
-  UserService,
   BrandService,
   CategoryService,
-  SupplierService,
   ProductService,
+  SupplierService,
+  UserService,
+  WarehouseService,
 } from './services';
 import { HotToastModule } from '@ngneat/hot-toast';
 
@@ -24,6 +25,7 @@ import { HotToastModule } from '@ngneat/hot-toast';
   declarations: [AppComponent],
   providers: [
     BrandService,
+    WarehouseService,
     CategoryService,
     SupplierService,
     ProductService,

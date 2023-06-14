@@ -24,18 +24,21 @@ import { HotToastService } from '@ngneat/hot-toast';
   standalone: true,
 })
 export class ProductShowComponent implements OnInit, OnDestroy {
+  private limit: number = 5;
+
   isFetching: boolean = false;
-  dumpElems: number[] = Array.from(new Array(5).keys());
+  dumpElems: number[] = Array.from(new Array(this.limit).keys());
+
   page: number = 1;
   order: 'desc' | 'asc' = 'desc';
-  products: Product[] = [];
   totalPages: number = 0;
   destroy$ = new Subject<void>();
+
+  products: Product[] = [];
 
   private isCached = false;
   private productsCached: Product[] = [];
   private totalPagesCached: number = 0;
-  private limit: number = 5;
   searchTerm: string = '';
 
   constructor(
