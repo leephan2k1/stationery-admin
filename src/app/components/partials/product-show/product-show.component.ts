@@ -51,7 +51,6 @@ export class ProductShowComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.handleFetchingProds();
     this.onPageChange();
   }
 
