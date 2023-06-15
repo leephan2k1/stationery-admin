@@ -1,27 +1,35 @@
 <h1 class="my-4 text-xl">Chỉnh sửa nhà cung cấp</h1>
 
-<form class="space-y-4">
+<form [formGroup]="supplierFm" (ngSubmit)="submitForm()" class="space-y-4">
   <div class="flex w-full flex-col">
     <label class="mb-2" for="name">Tên nhà cung cấp</label>
     <input
       class="input-ghost-primary input input-solid"
       placeholder="Tên nhà cung cấp..."
       type="text"
+      formControlName="name"
       id="name"
     />
   </div>
 
   <div class="flex w-full flex-col">
-    <label class="mb-2" for="name">Quốc gia</label>
+    <label class="mb-2" for="country">Quốc gia</label>
     <input
       class="input-ghost-primary input input-solid"
       placeholder="Quốc gia..."
       type="text"
-      id="name"
+      formControlName="country"
+      id="country"
     />
   </div>
 
   <div class="mt-4">
-    <button type="button" class="btn-primary btn w-fit rounded-lg">Lưu</button>
+    <button
+      [disabled]="!supplierFm.valid"
+      type="submit"
+      class="btn-primary btn w-fit rounded-lg"
+    >
+      Lưu
+    </button>
   </div>
 </form>
