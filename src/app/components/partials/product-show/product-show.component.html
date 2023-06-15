@@ -49,7 +49,7 @@
       <th>Danh mục</th>
       <th>Thương hiệu</th>
       <th>Thumbnail</th>
-      <th>Chi tiết thuộc tính</th>
+      <th class="absolute-center">Chi tiết thuộc tính</th>
       <th>Xoá</th>
     </tr>
   </thead>
@@ -93,8 +93,14 @@
         <td>{{ prod.price | currency : "VND" }}</td>
         <td>{{ prod.category }}</td>
         <td>{{ prod.brand }}</td>
-        <td>Quality Control Specialist</td>
-        <td class="flex items-center justify-center">
+        <td>
+          <div class="avatar">
+            <a [href]="prod.thumbnail" target="_blank" class="inline">
+              <img [src]="prod.thumbnail" alt="avatar" />
+            </a>
+          </div>
+        </td>
+        <td class="flex h-[5rem] items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
