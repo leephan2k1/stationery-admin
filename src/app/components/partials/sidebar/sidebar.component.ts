@@ -8,6 +8,8 @@ import { WarehouseIconComponent } from '../../icons/warehouse-icon/warehouse-ico
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { UserService } from '~/services';
+import { User } from '~/models';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,6 +21,7 @@ import { UserService } from '~/services';
     StreamlineComponent,
     WarehouseIconComponent,
     RouterModule,
+    CommonModule,
   ],
   templateUrl: './sidebar.component.html',
   standalone: true,
@@ -26,6 +29,7 @@ import { UserService } from '~/services';
 export class SidebarComponent implements OnInit {
   session: string = '';
   mode: string = '';
+  user: User | null = null;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -36,6 +40,12 @@ export class SidebarComponent implements OnInit {
     this.route.paramMap.subscribe((value) => {
       this.session = String(value.get('session'));
       this.mode = String(value.get('mode'));
+    });
+
+    this.userService.currentUser.subscribe({
+      next: (value) => {
+        this.user = value;
+      },
     });
   }
 
