@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Queries } from '../common/interfaces/listQuery.interface';
-import { ApiResponseList } from '../models/api.response';
-import { Brand } from '../models/brand.model';
+import { Queries } from '~/common/interfaces/listQuery.interface';
+import { ApiResponse, ApiResponseList } from '~/models';
+import { Brand } from '~/models';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +11,26 @@ import { Brand } from '../models/brand.model';
 export class BrandService {
   constructor(private readonly http: HttpClient) {}
 
-  public getCategories({
+  public getBrands({
     page,
     limit,
   }: Queries): Observable<ApiResponseList<Brand>> {
     return this.http.get<ApiResponseList<Brand>>('/brands', {
       params: { page, limit },
+    });
+  }
+
+  public deleteBrand(id: string): Observable<ApiResponse<Brand>> {
+    return this.http.delete<ApiResponse<Brand>>(`/brands/${id}`, {
+      withCredentials: true,
+    });
+  }
+
+  public createBrand(payload: {
+    name: string;
+  }): Observable<ApiResponse<Brand>> {
+    return this.http.post<ApiResponse<Brand>>(`/brands`, payload, {
+      withCredentials: true,
     });
   }
 }

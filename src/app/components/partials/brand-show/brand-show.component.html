@@ -51,22 +51,34 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th>6478bd743101e284e7dcf22f</th>
-        <td>Cy Ganderton</td>
-        <td>Blue</td>
+      <tr *ngFor="let brand of brands; trackBy: trackByFn; let i = index">
+        <th>{{ brand.id }}</th>
+        <td>{{ brand.name }}</td>
+        <td>{{ brand.createdBy }}</td>
         <td>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
+          <app-confirm-modal
+            [index]="'brand-delete' + i"
+            (messageEvent)="handleDeleteBrand(brand.id)"
           >
-            <path
-              fill="currentColor"
-              d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v10zM18 4h-2.5l-.71-.71c-.18-.18-.44-.29-.7-.29H9.91c-.26 0-.52.11-.7.29L8.5 4H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1z"
+            <label class="cursor-pointer" [for]="'brand-delete' + i">
+              <svg
+                class="transition-all duration-200 hover:text-error"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v10zM18 4h-2.5l-.71-.71c-.18-.18-.44-.29-.7-.29H9.91c-.26 0-.52.11-.7.29L8.5 4H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1z"
+                /></svg
+            ></label>
+            <input
+              class="modal-state"
+              [id]="'brand-delete' + i"
+              type="checkbox"
             />
-          </svg>
+          </app-confirm-modal>
         </td>
       </tr>
     </tbody>

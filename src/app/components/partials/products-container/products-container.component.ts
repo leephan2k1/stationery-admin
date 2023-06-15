@@ -31,7 +31,7 @@ export class ProductsContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.brandService
-      .getCategories({ page: 1, limit: 0 })
+      .getBrands({ page: 1, limit: 0 })
       .subscribe((brandsResponse) => {
         if (brandsResponse.ok) {
           this.brands = brandsResponse.data;
