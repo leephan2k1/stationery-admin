@@ -84,5 +84,8 @@
     </tbody>
   </table>
 
-  <app-pagination />
+  <app-pagination
+    *ngIf="brands && brands.length > 0 && totalPages !== 0"
+    [totalPages]="totalPages"
+  />
 </div>

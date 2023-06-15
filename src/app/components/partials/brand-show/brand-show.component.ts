@@ -47,7 +47,6 @@ export class BrandShowComponent implements OnInit {
   }
 
   handleDeleteBrand(id: string) {
-    console.log('id: ', id);
     this.brandService.deleteBrand(id).subscribe({
       next: () => {
         this.toast.success('Xoá thành công!');

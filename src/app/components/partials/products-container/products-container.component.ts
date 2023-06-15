@@ -47,7 +47,7 @@ export class ProductsContainerComponent implements OnInit {
       });
 
     this.supplierService
-      .getCategories({ page: 1, limit: 0 })
+      .getSupplier({ page: 1, limit: 0 })
       .subscribe((suppliersRespsonse) => {
         if (suppliersRespsonse.ok) {
           this.suppliers = suppliersRespsonse.data;
