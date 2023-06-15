@@ -117,11 +117,11 @@ export class ProductShowComponent implements OnInit, OnDestroy {
             return {
               ...e,
               // @ts-ignore
-              category: e.category.name,
+              category: e?.category?.name || '',
               // @ts-ignore
-              brand: e.brand.name,
+              brand: e?.brand?.name || '',
               // @ts-ignore
-              supplier: e.supplier.name,
+              supplier: e?.supplier?.name || '',
             };
           });
           this.totalPages = Math.ceil(response.count / this.limit);
